@@ -92,9 +92,9 @@ dry runs, manual overrides) when playing directly against the website’s AI.
 
 The instruction uses:
 
-- Program ID: `ChompZg47TcVy5fk2LxPEpW6SytFYBES5SHoqgrm8A4D`
-- Fee collector: `EGJnqcxVbhJFJ6Xnchtaw8jmPSvoLXfN2gWsY9Etz5SZ`
-- PDA seed: `[player_pubkey]`
+- Program ID
+- Fee collector
+- PDA seed
 
 ## Strategy quick reference
 
