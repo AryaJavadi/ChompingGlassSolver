@@ -1,4 +1,4 @@
-# Chomping Glass Solver (Rust)
+# Chomping Glass Solver
 
 A production-ready solver and command-line agent for the 5×8 **Chomping Glass** puzzle on Solana. The project is split into a `solver-core` library (game logic + policy export) and a `cli` crate (strategy exploration plus on-chain move submission).
 
