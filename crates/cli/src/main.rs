@@ -30,54 +30,54 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Evaluate a board state (fetched or manual) and suggest winning moves.
+    /// Suggest winning moves for a board state.
     Suggest(SuggestArgs),
-    /// Export the complete policy table to JSON for offline inspection.
+    /// Export the policy table to JSON.
     ExportPolicy { output: PathBuf },
-    /// Submit a move to the on-chain program using your wallet.
+    /// Play a move on-chain with your wallet.
     Play(PlayArgs),
 }
 
 #[derive(Parser, Debug)]
 struct SuggestArgs {
-    /// Comma-separated column heights, e.g. "0,0,-1,-1,-1,-1,-1,-1".
+    /// Manual column heights, e.g. "0,0,-1,-1,-1,-1,-1,-1".
     #[arg(long)]
     state: Option<String>,
-    /// RPC endpoint to use when fetching live state.
+    /// RPC endpoint when fetching live state.
     #[arg(long, default_value = DEFAULT_RPC)]
     rpc_url: String,
-    /// Player public key to derive the on-chain game PDA.
+    /// Player public key for PDA derivation.
     #[arg(long)]
     player: Option<String>,
     /// Program ID to query.
     #[arg(long, default_value = DEFAULT_PROGRAM)]
     program: String,
-    /// Emit JSON instead of human-readable text.
+    /// Emit JSON instead of text.
     #[arg(long)]
     json: bool,
 }
 
 #[derive(Parser, Debug)]
 struct PlayArgs {
-    /// Path to the signing keypair JSON file.
+    /// Signing keypair JSON path.
     #[arg(long)]
     wallet: PathBuf,
-    /// RPC endpoint to use.
+    /// RPC endpoint.
     #[arg(long, default_value = DEFAULT_RPC)]
     rpc_url: String,
     /// Program ID to target.
     #[arg(long, default_value = DEFAULT_PROGRAM)]
     program: String,
-    /// Optional manual board state; if omitted the on-chain account is fetched.
+    /// Manual board state override.
     #[arg(long)]
     state: Option<String>,
-    /// Optional explicit row (1-indexed) to play.
+    /// Explicit row (1-indexed).
     #[arg(long)]
     row: Option<u8>,
-    /// Optional explicit column (1-indexed) to play.
+    /// Explicit column (1-indexed).
     #[arg(long)]
     col: Option<u8>,
-    /// Skip submitting the transaction and just show what would be sent.
+    /// Print the transaction without sending.
     #[arg(long)]
     dry_run: bool,
 }

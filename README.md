@@ -85,7 +85,7 @@ cargo run -p cli -- play \
   --rpc-url https://api.mainnet-beta.solana.com
 ```
 
-By default, the solver fetches your PDA game account, evaluates it, and plays the first winning move. Use `--row`/`--col` (1-indexed) to override or `--dry-run` to print the transaction without broadcasting.
+The solver fetches your PDA game account, evaluates it, and plays the first winning move. Use `--row`/`--col` (1-indexed) to override or `--dry-run` to print the transaction without broadcasting.
 
 See `INSTRUCTIONS.md` for a step-by-step walkthrough (wallet prep, PDA lookup,
 dry runs, manual overrides) when playing directly against the website’s AI.
@@ -117,4 +117,7 @@ solana-keygen sign \
   --message "Chomping Glass submission by <Your Name> on <Date>"
 ```
 
-Record the base58 signature, your public key, and the Solscan link returned by the `play` command for the final deliverable.
+## Winning proof
+
+- **Solscan TX:** https://solscan.io/tx/3Sti5P7b3BUgyWDLHEvok8GXySkZpTJy4izoUu31KaKvCcWmHmSWdReYidvW1QRsKJgH63m8tcLi45ue36GbdhcL
+- **Gameplay video:** [Watch `Game_sample.mp4`](Game_sample.mp4?raw=1)

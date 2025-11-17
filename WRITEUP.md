@@ -8,11 +8,11 @@
 ### Board coordinate system
 
 - Rows are numbered **top → bottom** and columns **left → right** to match the game’s
-	physical layout.
+  physical layout.
 - The poison glass lives at `(5, 8)` (bottom-right). Attempting to chomp it loses.
 - Chomping `(r, c)` removes that candy and **only** the candies that are both
-	above it and to its left (rows `1..=r` ∩ columns `1..=c`). This is why the
-	solver state can be represented as column heights.
+  above it and to its left (rows `1..=r` ∩ columns `1..=c`). This is why the
+  solver state can be represented as column heights.
 
 ## Hardest technical aspects
 
@@ -32,3 +32,27 @@
 - After the opener, the solver’s winning replies enforce asymmetry: `(1,5)` vs `(2,1)`, `(4,2)` vs `(1,3)`, `(2,3)`/`(1,4)` vs `(3,1)`, `(3,8)` vs `(4,1)`, `(4,6)` vs `(5,1)`.
 - The engine automatically detects equal-arm L shapes around the poison (column 8 height = bottom row width) as losing states and steers clear by preferring moves that keep the arms unbalanced.
 - When forced into a losing position, the CLI surfaces the lack of winning replies, signaling you should maximize asymmetry and hope for an AI error rather than relying on non-existent perfect play.
+
+## Interaction notes
+
+I started with purely manual on-chain play to build intuition. Losing repeatedly exposed the recurring end-state pattern the website’s AI relies on, which strongly suggested a forced-win line must exist. Rather than attempting full backward induction over the enormous tree, I worked two moves back from the AI’s inevitable finishing blow and only widened the search when that branch was forced. After enough live rounds it was obvious that symmetric configurations around the glass cell dictate who wins.
+
+## Approach (gameplay + tooling)
+
+- Logged every board that could be steered into a winning symmetry and appended it to `chomping_glass_policy.json` for future lookups.
+- Simulated the 5×8 board and asked paired LLM agents (Sonnet plus a second model) to alternate turns; each move had to justify an insert/delete in the policy file, which helped stress-test the induction data set.
+- Fed the curated states into the memoized solver so the CLI could choose parity-preserving moves deterministically.
+
+### AI assistance
+
+AI support stayed in the “blue-coding” lane: scaffolding repetitive policy entries, sanity-checking the simulated board, and rubber-ducking with Sonnet when `lib.rs` borrow checker errors were ambiguous. The compiler does the heavy lifting, but having an LLM nudge me toward the right lifetime boundary was handy.
+
+## Conclusion
+
+The goal was “production-ready without being overbuilt.” Between the solver-core library, CLI, and policy export, the stack hasn’t lost against the on-chain AI yet. The strategy-file idea stemmed from the hunch that the AI either hard-codes a few branches or simply knows the full impartial-game solution, so mirroring that knowledge base keeps us honest.
+
+## Proof of victory
+
+- Solscan transaction (win): https://solscan.io/tx/3Sti5P7b3BUgyWDLHEvok8GXySkZpTJy4izoUu31KaKvCcWmHmSWdReYidvW1QRsKJgH63m8tcLi45ue36GbdhcL
+- Recorded CLI session (included in submission assets).
+- Signed message & public key: _pending inclusion—see README “Proof of Victory” section_.
