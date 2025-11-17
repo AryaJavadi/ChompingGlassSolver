@@ -120,4 +120,8 @@ solana-keygen sign \
 ## Winning proof
 
 - **Solscan TX:** https://solscan.io/tx/3Sti5P7b3BUgyWDLHEvok8GXySkZpTJy4izoUu31KaKvCcWmHmSWdReYidvW1QRsKJgH63m8tcLi45ue36GbdhcL
-- **Gameplay video:** [Watch `Game_sample.mp4`](Game_sample.mp4?raw=1)
+
+<video controls muted playsinline width="640">
+  <source src="Game_sample.mp4?raw=1" type="video/mp4" />
+  Your browser does not support inline video. Download <a href="Game_sample.mp4?raw=1">Game_sample.mp4</a> instead.
+</video>
