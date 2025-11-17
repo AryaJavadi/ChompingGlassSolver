@@ -119,6 +119,8 @@ solana-keygen sign \
 
 ## Winning proof
 
+https://github.com/user-attachments/assets/e9c870d7-ef08-453d-aa8f-80314c288cf5
+
 - **Solscan TX:** https://solscan.io/tx/3Sti5P7b3BUgyWDLHEvok8GXySkZpTJy4izoUu31KaKvCcWmHmSWdReYidvW1QRsKJgH63m8tcLi45ue36GbdhcL
 
 <video controls muted playsinline width="640">
